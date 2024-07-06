@@ -1,13 +1,13 @@
 import {Table} from "../ui/table/Table.tsx";
 import {TableBody} from "../ui/table/tableBody/TableBody.tsx";
-import {GetRatesResponse, MarketData} from "../../types.ts";
 import {CurrencyRateHeadTable} from "../currencyRateHeadTable/CurrencyRateHeadTable.tsx";
 import {CurrencyRateRowTable} from "../currencyRateRowTable/CurrencyRateRowTable.tsx";
-import {useEffect, useState} from "react";
+import {useEffect, useRef} from "react";
+import {marketAPI} from "../../api/marketAPI.ts";
+import {Market} from "../../types.ts";
 
 export const CurrencyRateTable = ()=>{
-    console.log('render')
-    const [rates, setRates] = useState<MarketData[]>([])
+    const isPollingActiveRef = useRef<boolean>(true)
 
     const data = [
         {
@@ -54,64 +54,49 @@ export const CurrencyRateTable = ()=>{
         },
     ]
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const responses = await Promise.all([
-    //                 fetch('http://localhost:3000/api/v1/first'),
-    //                 fetch('http://localhost:3000/api/v1/second'),
-    //                 fetch('http://localhost:3000/api/v1/third')
-    //             ]);
-    //
-    //             const data = await Promise.all(responses.map(response => {
-    //                 if (!response.ok) {
-    //                     throw new Error('Network response was not ok');
-    //                 }
-    //                 return response.json();
-    //             }));
-    //
-    //             console.log(data);
-    //         } catch (error) {
-    //             console.error('Fetch error:', error);
-    //         }
-    //     };
-    //
-    //     fetchData();
-    // }, []);
-
-    let isPollingActive = true
-
-    const longPoll = async () => {
-        if (!isPollingActive) return
+    const longPoll = async (market:Market) => {
+        if (!isPollingActiveRef) return
 
         try {
-            const response: Response = await fetch('http://localhost:3000/api/v1/first/poll')
-            if (response.ok) {
-                const data: GetRatesResponse = await response.json()
-                console.log('New data:', data)
-            } else {
-                console.error('Error:', response.status)
-            }
+            console.log('start long pol', market)
+            const response = await marketAPI.getNewCurrency(market)
+            console.log(`result long pul ${market}`, response);
+
         } catch (error) {
-            console.error('Fetch error:', error)
+            console.error('Fetch error:', error);
+            isPollingActiveRef.current = true
         } finally {
-            if (isPollingActive) {
-                longPoll();
+            if (isPollingActiveRef.current) {
+                longPoll(market);
             }
         }
-    };
+    }
 
     const stopLongPolling = () => {
-        isPollingActive = false;
+        isPollingActiveRef.current = false;
     };
 
     useEffect(() => {
-        longPoll()
+        const fetchData = async () => {
+            try {
+                Object.values(Market).forEach(market=> {
+                    marketAPI.getInitialCurrency(market)
+                        .then((response)=> {
+                        console.log(`initial response ${market}`, response)
+                        longPoll(market)
+                    })
+                })
+            } catch (error) {
+                console.error('Fetch error:', error)
+            }
+        }
+        fetchData()
 
-        return () => {""
-            stopLongPolling();
+        return () => {
+            stopLongPolling()
         }
     }, [])
+
 
     return (
         <Table>
