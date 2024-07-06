@@ -1,10 +1,8 @@
 import {Table} from "../ui/table/Table.tsx";
-import {TableHead} from "../ui/table/tableHead/TableHead.tsx";
-import {TableRow} from "../ui/table/tableRow/TableRow.tsx";
-import {TableHeadCell} from "../ui/table/tableHeadCell/TableHeadCell.tsx";
 import {TableBody} from "../ui/table/tableBody/TableBody.tsx";
-import {CurrencyRateRow} from "../currencyRateRow/CurrencyRateRow.tsx";
 import {CurrencyPair} from "../../types.ts";
+import {CurrencyRateHeadTable} from "../currencyRateHeadTable/CurrencyRateHeadTable.tsx";
+import {CurrencyRateRowTable} from "../currencyRateRowTable/CurrencyRateRowTable.tsx";
 
 export const CurrencyRateTable = ()=>{
 
@@ -53,29 +51,12 @@ export const CurrencyRateTable = ()=>{
         },
     ]
 
-
-
     return (
         <Table>
-            <TableHead>
-                <TableRow>
-                    <TableHeadCell>
-                        <span>Pair name / market</span>
-                    </TableHeadCell>
-                    <TableHeadCell >
-                        <span>First</span>
-                    </TableHeadCell>
-                    <TableHeadCell  >
-                        <span >Second </span>
-                    </TableHeadCell>
-                    <TableHeadCell >
-                        <span>Third</span>
-                    </TableHeadCell>
-                </TableRow>
-            </TableHead>
+            <CurrencyRateHeadTable/>
             <TableBody>
                 {data?.map(item => (
-                    <CurrencyRateRow item={item} key={item.id} />
+                    <CurrencyRateRowTable item={item} key={item.id} />
                 ))}
             </TableBody>
         </Table>

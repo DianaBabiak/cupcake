@@ -6,7 +6,7 @@ interface CurrencyRateRowProps {
     item: CurrencyPair
 }
 
-export const CurrencyRateRow = ({item}:CurrencyRateRowProps)=>{
+export const CurrencyRateRowTable = ({item}:CurrencyRateRowProps)=>{
     const { first, second, third,pair } = item
 
     const minValue = Math.min(first, second, third)
