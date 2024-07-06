@@ -29,3 +29,7 @@ export enum Market {
     second='second',
     third='third',
 }
+
+export type MarketRates = Record<CurrencyPair, number>
+
+export type State = Record<Market, MarketRates>
