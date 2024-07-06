@@ -1,12 +1,15 @@
 import {Table} from "../ui/table/Table.tsx";
 import {TableBody} from "../ui/table/tableBody/TableBody.tsx";
-import {CurrencyPair} from "../../types.ts";
+import {GetRatesResponse, MarketData} from "../../types.ts";
 import {CurrencyRateHeadTable} from "../currencyRateHeadTable/CurrencyRateHeadTable.tsx";
 import {CurrencyRateRowTable} from "../currencyRateRowTable/CurrencyRateRowTable.tsx";
+import {useEffect, useState} from "react";
 
 export const CurrencyRateTable = ()=>{
+    console.log('render')
+    const [rates, setRates] = useState<MarketData[]>([])
 
-    const data:CurrencyPair[] = [
+    const data = [
         {
             id: 1,
             pair: "RUB/CUPCAKE",
@@ -50,6 +53,65 @@ export const CurrencyRateTable = ()=>{
             third: 1.345,
         },
     ]
+
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const responses = await Promise.all([
+    //                 fetch('http://localhost:3000/api/v1/first'),
+    //                 fetch('http://localhost:3000/api/v1/second'),
+    //                 fetch('http://localhost:3000/api/v1/third')
+    //             ]);
+    //
+    //             const data = await Promise.all(responses.map(response => {
+    //                 if (!response.ok) {
+    //                     throw new Error('Network response was not ok');
+    //                 }
+    //                 return response.json();
+    //             }));
+    //
+    //             console.log(data);
+    //         } catch (error) {
+    //             console.error('Fetch error:', error);
+    //         }
+    //     };
+    //
+    //     fetchData();
+    // }, []);
+
+    let isPollingActive = true
+
+    const longPoll = async () => {
+        if (!isPollingActive) return
+
+        try {
+            const response: Response = await fetch('http://localhost:3000/api/v1/first/poll')
+            if (response.ok) {
+                const data: GetRatesResponse = await response.json()
+                console.log('New data:', data)
+            } else {
+                console.error('Error:', response.status)
+            }
+        } catch (error) {
+            console.error('Fetch error:', error)
+        } finally {
+            if (isPollingActive) {
+                longPoll();
+            }
+        }
+    };
+
+    const stopLongPolling = () => {
+        isPollingActive = false;
+    };
+
+    useEffect(() => {
+        longPoll()
+
+        return () => {""
+            stopLongPolling();
+        }
+    }, [])
 
     return (
         <Table>
