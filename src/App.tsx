@@ -1,12 +1,9 @@
-import './App.css'
+import './styles/App.css'
+import {CurrencyRateTable} from "./components/currencyRateTable/CurrencyRateTable.tsx";
 
 function App() {
 
-  return (
-    <div>
-Hello World!
-    </div>
-  )
+  return <CurrencyRateTable/>
 }
 
 export default App

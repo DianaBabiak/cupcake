@@ -1,0 +1,43 @@
+.table {
+    border-collapse: collapse;
+    border: 1px solid var(--primary-color);
+    max-width: 100%;
+    table-layout: fixed;
+    margin: 0 auto;
+}
+
+.tableHead {
+    height: 36px;
+    background-color: var(--accent-color);
+
+}
+
+.tableRow {
+    height: 36px;
+
+
+}
+
+.tableHeadCell {
+    padding: 6px 24px;
+    border: 1px solid var(--primary-color)
+}
+
+.tableBodyCell {
+    padding: 6px 24px;
+    height: fit-content;
+    border: 1px solid var(--primary-color);
+}
+
+.tableBodyCell:first-child{
+    text-align: start;
+}
+
+.tableHeadCell:first-child{
+    text-align: start;
+}
+
+.minValue{
+    background-color: var(--third-color);
+}
+

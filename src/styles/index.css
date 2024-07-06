@@ -36,9 +36,9 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 21px;
   font-weight: 400;
-  color: black;
+  color: var(--primary-color);
 
-  background-color: white;
+  background-color: var(--secondary-color);
   min-width: 320px;
   min-height: 100vh;
 }
