@@ -4,14 +4,14 @@ export interface Rates {
     EUR: number
 }
 
-export interface GetRatesResponse  {
+export interface GetMarketCurrencyRatesResponse {
     rates: Rates
     base: string
     timestamp: number
     date: string
 }
 
-export enum CurrencyPair {
+export enum CurrencyPairs {
     RUB_CUPCAKE = 'RUB/CUPCAKE',
     USD_CUPCAKE = 'USD/CUPCAKE',
     EUR_CUPCAKE = 'EUR/CUPCAKE',
@@ -20,16 +20,13 @@ export enum CurrencyPair {
     EUR_USD = 'EUR/USD',
 }
 
-export interface CurrencyPairRates {
-    [pair: string]: number
+export enum Markets {
+    First='First',
+    Second='Second',
+    Third='Third',
 }
 
-export enum Market {
-    first='first',
-    second='second',
-    third='third',
-}
+export type CurrencyPairRates = Record<CurrencyPairs, number>
+export type CurrencyRateMapByMarket = Record<Markets, number>
 
-export type MarketRates = Record<CurrencyPair, number>
-
-export type State = Record<Market, MarketRates>
+export type State = Record<Markets, CurrencyPairRates>

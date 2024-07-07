@@ -1,9 +1,8 @@
 import './styles/App.css'
-import {CurrencyRateTable} from "./components/currencyRateTable/CurrencyRateTable.tsx";
+import {CurrencyRatesTable} from "./components/currencyRatesTable/CurrencyRatesTable.tsx";
 
 function App() {
-
-  return <CurrencyRateTable/>
+  return <CurrencyRatesTable/>
 }
 
 export default App

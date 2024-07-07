@@ -1,12 +1,13 @@
-import {GetRatesResponse, Market} from "../types.ts";
-import {fetchState} from "./utils.ts";
+import {GetMarketCurrencyRatesResponse, Markets} from "../types.ts";
+import {fetchData} from "./utils/fetchData.ts";
+import {BASE_URL} from "./constants.ts";
 
 export const marketAPI = {
-    getInitialCurrency (market: Market): Promise<GetRatesResponse> {
-        return fetchState(`http://localhost:3000/api/v1/${market}`);
+    getInitialMarketCurrencyRates (market: Markets): Promise<GetMarketCurrencyRatesResponse> {
+        return fetchData(`${BASE_URL}${market}`);
     },
 
-    getNewCurrency(market: Market): Promise<GetRatesResponse> {
-        return fetchState(`http://localhost:3000/api/v1/${market}/poll`);
+    getActualMarketCurrencyRates(market: Markets): Promise<GetMarketCurrencyRatesResponse> {
+        return fetchData(`${BASE_URL}${market}/poll`);
     },
 }
