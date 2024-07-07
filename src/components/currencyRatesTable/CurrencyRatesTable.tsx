@@ -5,7 +5,7 @@ import {TableBody} from "../common/table/tableBody/TableBody.tsx";
 import {HEADER_ITEMS, ROWS_ITEMS} from "./constants.ts";
 import {useFetchCurrencyRates} from "./hooks/useFetchCurrencyRates.tsx";
 
-export const CurrencyRatesTable = ()=>{
+export const CurrencyRatesTable = () => {
     useFetchCurrencyRates()
 
     return (

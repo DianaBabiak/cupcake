@@ -9,11 +9,11 @@ export interface CurrencyContextType {
 
 export const CurrencyContext = createContext<CurrencyContextType | null>(null);
 
-export const CurrencyProvider = ({ children }:PropsWithChildren) => {
-    const [state, setState] = useState<State>(()=>getInitialState())
+export const CurrencyProvider = ({children}: PropsWithChildren) => {
+    const [state, setState] = useState<State>(() => getInitialState())
 
     return (
-        <CurrencyContext.Provider value={{ state, setState }}>
+        <CurrencyContext.Provider value={{state, setState}}>
             {children}
         </CurrencyContext.Provider>
     )

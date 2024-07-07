@@ -4,16 +4,16 @@ import {TableRow} from "../../../common/table/tableRow/TableRow.tsx";
 import {TableHeadCell} from "../../../common/table/tableHeadCell/TableHeadCell.tsx";
 
 interface CurrencyRatesTableHeaderProps {
-    headerItems:string[]
+    headerItems: string[]
 }
 
-export const CurrencyRatesTableHeader = memo(({headerItems}:CurrencyRatesTableHeaderProps) => {
+export const CurrencyRatesTableHeader = memo(({headerItems}: CurrencyRatesTableHeaderProps) => {
     return (
         <TableHead>
             <TableRow>
                 {headerItems.map(item => (
                     <TableHeadCell key={item}>
-                       {item}
+                        {item}
                     </TableHeadCell>
                 ))}
             </TableRow>

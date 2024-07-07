@@ -3,11 +3,11 @@ import {CurrencyRatesTable} from "./components/currencyRatesTable/CurrencyRatesT
 import {CurrencyProvider} from "./components/currencyRatesTable/contexts/CurrencyContext.tsx";
 
 function App() {
-  return (
-   <CurrencyProvider>
-     <CurrencyRatesTable/>
-   </CurrencyProvider>
-  )
+    return (
+        <CurrencyProvider>
+            <CurrencyRatesTable/>
+        </CurrencyProvider>
+    )
 }
 
 export default App

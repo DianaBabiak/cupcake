@@ -21,9 +21,9 @@ export enum CurrencyPairs {
 }
 
 export enum Markets {
-    First='First',
-    Second='Second',
-    Third='Third',
+    First = 'First',
+    Second = 'Second',
+    Third = 'Third',
 }
 
 export type CurrencyPairRates = Record<CurrencyPairs, number>

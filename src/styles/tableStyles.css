@@ -29,15 +29,15 @@
     border: 1px solid var(--primary-color);
 }
 
-.tableBodyCell:first-child{
+.tableBodyCell:first-child {
     text-align: start;
 }
 
-.tableHeadCell:first-child{
+.tableHeadCell:first-child {
     text-align: start;
 }
 
-.minValue{
+.minValue {
     background-color: var(--third-color);
 }
 

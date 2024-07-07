@@ -1,9 +1,10 @@
 import {ComponentPropsWithoutRef, forwardRef} from "react";
 
-interface TableHeadCellProps extends ComponentPropsWithoutRef<'th'> {}
+interface TableHeadCellProps extends ComponentPropsWithoutRef<'th'> {
+}
 
 export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps>(
-    ({ className = '', ...restProps}, ref) => {
+    ({className = '', ...restProps}, ref) => {
 
         const classNames = `tableHeadCell ${className}`.trim()
 

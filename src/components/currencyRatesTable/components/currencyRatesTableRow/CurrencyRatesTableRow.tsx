@@ -8,17 +8,17 @@ import {getCurrencyRateMapByMarket} from "../../utils/getCurrencyRateMapByMarket
 import {useCurrencyContext} from "../../hooks/useCurrencyContext.tsx";
 
 interface CurrencyRatesTableRowProps {
-    currencyPair:CurrencyPairs
+    currencyPair: CurrencyPairs
 }
 
-export const CurrencyRatesTableRow = memo(({currencyPair}:CurrencyRatesTableRowProps)=>{
-    const { state } = useCurrencyContext()
+export const CurrencyRatesTableRow = memo(({currencyPair}: CurrencyRatesTableRowProps) => {
+    const {state} = useCurrencyContext()
 
-    const currencyRateValueMapByMarket = getCurrencyRateMapByMarket(state,currencyPair)
+    const currencyRateValueMapByMarket = getCurrencyRateMapByMarket(state, currencyPair)
     const minValue = getMinCurrencyRateForAllMarkets(currencyRateValueMapByMarket)
 
     const getCellClassName = (currencyValue: number) => {
-        if(minValue === null){
+        if (minValue === null) {
             return ''
         }
 
@@ -27,7 +27,7 @@ export const CurrencyRatesTableRow = memo(({currencyPair}:CurrencyRatesTableRowP
 
     return (
         <TableRow>
-            <TableBodyCell>{currencyPair}</TableBodyCell >
+            <TableBodyCell>{currencyPair}</TableBodyCell>
             {Object.values(Markets).map(market => {
                 const currencyValue = state[market][currencyPair]
 
